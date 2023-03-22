@@ -9,7 +9,7 @@ namespace Game.Core.GameFlow
         /// <summary>
         /// The path of the GameRuntimeConfig asset.
         /// </summary>
-        public const string GAME_RUNTIME_CONFIG_PATH = "Game/Internal/GameRuntimeConfig";
+        public const string GAME_RUNTIME_CONFIG_PATH = "Internal/GameRuntimeConfig";
         
         [Header("Boot")]
         

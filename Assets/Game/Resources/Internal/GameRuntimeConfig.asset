@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysStartGameFromBootScene: 1
   _bootScene: 
-  _allowAddingToGameContainerOutsideBootScene: 1
-  _logging: 0
-  _gameLoggingPrefix: GAME
-  _gameLoggingPrefixColor: {r: 0, g: 0, b: 0, a: 0}
+  _disallowAddingToGameContainerOutsideBootScene: 1
+  _logging: 1
