@@ -32,6 +32,7 @@ namespace Game.Core.Base.SceneManagement
             var loadTask = SceneManager.LoadSceneAsync(name);
             
             loadTask.allowSceneActivation = false;
+            loadTask.allowSceneActivation = true;
             
             while (!loadTask.isDone)
             {
@@ -39,9 +40,7 @@ namespace Game.Core.Base.SceneManagement
 
                 yield return null;
             }
-            
-            loadTask.allowSceneActivation = true;
-            
+
             onSceneLoaded?.Invoke();
         }
     }
