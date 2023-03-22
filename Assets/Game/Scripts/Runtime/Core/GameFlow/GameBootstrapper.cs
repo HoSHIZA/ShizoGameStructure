@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Game.Core.GameFlow
 {
+    /// <summary>
+    /// The entry point into the game, started when you start the boot scene.
+    /// </summary>
     public sealed class GameBootstrapper : MonoBehaviour
     {
         private GameStateMachine _stateMachine;
