@@ -30,9 +30,9 @@ namespace Game.Core.GameFlow
         
         private static void LogWhenStateChanged(Type type)
         {
-            if (!GameRunner.RuntimeConfig.Logging) return;
+            if (!GameRunner.RuntimeConfig.GameStateMachineLogging) return;
 
-            Debug.Log($"<color=cyan>[GAME][GAME STATE MACHINE]</color> Enter to <color=orange>{type.Name}</color>.");
+            Debug.Log($"<color=cyan>[GAME] [GAME STATE MACHINE]</color> Enter to <color=orange>{type.Name}</color>.");
         }
     }
 }

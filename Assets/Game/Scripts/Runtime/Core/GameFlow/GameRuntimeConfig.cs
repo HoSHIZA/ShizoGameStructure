@@ -27,6 +27,9 @@ namespace Game.Core.GameFlow
         [Tooltip("Whether logging is enabled for important components responsible for loading and controlling game flow.")]
         [SerializeField] private bool _logging = true;
         
+        [Tooltip("Whether logging is enabled for the GameStateMachine.")]
+        [SerializeField] private bool _gameStateMachineLogging = true;
+        
         /// <summary>
         /// Indicates whether the game should always start from the boot scene.
         /// </summary>
@@ -41,6 +44,11 @@ namespace Game.Core.GameFlow
         /// Indicates whether logging is enabled for the game.
         /// </summary>
         public bool Logging => _logging;
+        
+        /// <summary>
+        /// Indicates whether logging is enabled for the GameStateMachine.
+        /// </summary>
+        public bool GameStateMachineLogging => _gameStateMachineLogging;
 
         /// <summary>
         /// Gets the name of the boot scene.
