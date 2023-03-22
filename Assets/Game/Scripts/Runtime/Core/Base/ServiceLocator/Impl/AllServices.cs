@@ -10,6 +10,6 @@
         /// <summary>
         /// A static container containing one of the IServiceLocator implementations.
         /// </summary>
-        public static IServiceLocator Container => _instance != null ? _instance : new StaticServiceLocator();
+        public static IServiceLocator Container => _instance != null ? _instance : _instance = new StaticServiceLocator();
     }
 }
