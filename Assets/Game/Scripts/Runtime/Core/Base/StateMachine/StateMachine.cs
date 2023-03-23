@@ -17,9 +17,10 @@ namespace Game.Core.Base.StateMachine
         /// Called when the state changes.
         /// </summary>
         /// <returns>State Type.</returns>
-        public Action<Type> OnStateChanged;
+        public event Action<Type> OnStateChanged;
         
         private Dictionary<Type, State<T>> _states;
+        private State<T> _initialState;
         private State<T> _currentState;
         private bool _isSetup;
         
@@ -82,9 +83,10 @@ namespace Game.Core.Base.StateMachine
             
             _currentState?.Exit();
             _currentState = state;
-            _currentState.Enter();
             
             OnStateChanged?.Invoke(_currentState.GetType());
+            
+            _currentState.Enter();
             
             return true;
         }
@@ -158,7 +160,7 @@ namespace Game.Core.Base.StateMachine
         /// </remarks>
         protected void SetInitialState<TState>() where TState : State<T>
         {
-            ChangeState<State<T>>();
+            SetInitialState(typeof(TState));
         }
         
         /// <summary>
@@ -173,7 +175,9 @@ namespace Game.Core.Base.StateMachine
         {
             if (_isSetup) return;
             
-            ChangeState(type);
+            _initialState = GetState(type);
+            
+            ChangeState(_initialState.GetType());
             
             _isSetup = true;
         }
