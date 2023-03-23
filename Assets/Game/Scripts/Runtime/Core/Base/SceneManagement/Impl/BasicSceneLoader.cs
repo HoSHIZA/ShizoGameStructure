@@ -21,22 +21,22 @@ namespace Game.Core.Base.SceneManagement
         public void LoadScene(string name, bool validateSceneName = true, Action onSceneLoaded = null,
             Action<float> onLoadProgress = null)
         {
-            _coroutineRunner.StartCoroutine(LoadSceneTask(name, validateSceneName, onSceneLoaded, onLoadProgress));
+            _coroutineRunner.StartCoroutine(LoadSceneCoroutine(name, validateSceneName, onSceneLoaded, onLoadProgress));
         }
         
-        private IEnumerator LoadSceneTask(string name, bool validateSceneName = true, Action onSceneLoaded = null,
+        private IEnumerator LoadSceneCoroutine(string name, bool validateSceneName = true, Action onSceneLoaded = null,
             Action<float> onLoadProgress = null)
         {
             if (validateSceneName && SceneManager.GetActiveScene().name == name) yield break;
             
-            var loadTask = SceneManager.LoadSceneAsync(name);
+            var loadOperation = SceneManager.LoadSceneAsync(name);
             
-            loadTask.allowSceneActivation = false;
-            loadTask.allowSceneActivation = true;
+            loadOperation.allowSceneActivation = false;
+            loadOperation.allowSceneActivation = true;
             
-            while (!loadTask.isDone)
+            while (!loadOperation.isDone)
             {
-                onLoadProgress?.Invoke(loadTask.progress);
+                onLoadProgress?.Invoke(loadOperation.progress);
 
                 yield return null;
             }
