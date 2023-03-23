@@ -13,7 +13,10 @@ namespace Game.Core.GameFlow
         private void Awake()
         {
             GameRunner.AddToGameContainer(gameObject);
-            
+        }
+        
+        private void Start()
+        {
             _stateMachine = new GameStateMachine(new BasicSceneLoader(this));
             
             GameRunner.SetGameStateMachine(_stateMachine);
