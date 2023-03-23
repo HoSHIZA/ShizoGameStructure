@@ -31,7 +31,7 @@ namespace Game.Core.GameFlow
         /// <summary>
         /// True, if current scene is boot scene.
         /// </summary>
-        public static bool CurrentSceneIsBoot => SceneManager.GetActiveScene().name == RuntimeConfig.GetBootScene();
+        public static bool CurrentSceneIsBoot => SceneManager.GetActiveScene().name == RuntimeConfig.BootScene;
         
         /// <summary>
         /// Loads the boot scene of the game after all assemblies have been loaded.
@@ -39,24 +39,12 @@ namespace Game.Core.GameFlow
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void LoadBootScene()
         {
-            _runtimeConfig = GameRuntimeConfig.LoadFromResources();
-            
+#if UNITY_EDITOR
             if (!RuntimeConfig.AlwaysStartGameFromBootScene) return;
             if (CurrentSceneIsBoot) return;
             
-            var bootScene = RuntimeConfig.GetBootScene();
-            
-            if (string.IsNullOrEmpty(bootScene))
-            {
-#if UNITY_EDITOR
-                Debug.LogWarning("<color=cyan>[GAME]</color> Boot scene cannot be loaded.\n" +
-                                 "Perhaps it does not exist, or it is not added to the build settings");
+            SceneManager.LoadScene(RuntimeConfig.BootScene);
 #endif
-                
-                return;
-            }
-            
-            SceneManager.LoadScene(bootScene);
         }
         
         /// <summary>

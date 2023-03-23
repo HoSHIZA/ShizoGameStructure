@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Core.GameFlow
 {
@@ -19,7 +18,7 @@ namespace Game.Core.GameFlow
         [Tooltip("The name of the boot scene.")]
         [SerializeField] private string _bootScene = "";
         
-        [Tooltip("If true, you will not be allowed to add objects to the game container outside the boot scene.")]
+        [Tooltip("If true, you will not be allowed to add objects to the game container outside the boot scene. It works only if the boot scene is defined and correct.")]
         [SerializeField, Space] private bool _disallowAddingToGameContainerOutsideBootScene = true;
         
         [Header("Debugging")]
@@ -34,6 +33,11 @@ namespace Game.Core.GameFlow
         /// Indicates whether the game should always start from the boot scene.
         /// </summary>
         public bool AlwaysStartGameFromBootScene => _alwaysStartGameFromBootScene;
+        
+        /// <summary>
+        /// Gets the name of the boot scene.
+        /// </summary>
+        public string BootScene => _bootScene;
         
         /// <summary>
         /// Indicates whether objects can be added to the game container outside the boot scene.
@@ -51,23 +55,6 @@ namespace Game.Core.GameFlow
         public bool GameStateMachineLogging => _gameStateMachineLogging;
 
         /// <summary>
-        /// Gets the name of the boot scene.
-        /// </summary>
-        public string GetBootScene()
-        {
-            if (string.IsNullOrEmpty(_bootScene))
-            {
-                return SceneManager.sceneCountInBuildSettings != 0 ? SceneManager.GetSceneByBuildIndex(0).name : null;
-            }
-            else
-            {
-                var scene = SceneManager.GetSceneByName(_bootScene);
-
-                return scene.IsValid() ? scene.name : null;
-            }
-        }
-        
-        /// <summary>
         /// Loads a <see cref="GameRuntimeConfig"/> from resources.
         /// </summary>
         /// <param name="customPath">Optional custom path to the resource asset.</param>
@@ -84,11 +71,11 @@ namespace Game.Core.GameFlow
                 }
             }
             
-            var gameRuntimeConfig = Resources.Load<GameRuntimeConfig>(GAME_RUNTIME_CONFIG_PATH);
+            var configFromDefaultPath = Resources.Load<GameRuntimeConfig>(GAME_RUNTIME_CONFIG_PATH);
             
-            if (gameRuntimeConfig == null) gameRuntimeConfig = CreateInstance<GameRuntimeConfig>();
+            if (configFromDefaultPath == null) configFromDefaultPath = CreateInstance<GameRuntimeConfig>();
             
-            return gameRuntimeConfig;
+            return configFromDefaultPath;
         }
     }
 }

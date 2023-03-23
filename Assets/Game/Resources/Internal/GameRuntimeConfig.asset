@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameRuntimeConfig
   m_EditorClassIdentifier: 
   _alwaysStartGameFromBootScene: 1
-  _bootScene: 
+  _bootScene: BootScene
   _disallowAddingToGameContainerOutsideBootScene: 1
   _logging: 1
+  _gameStateMachineLogging: 1
