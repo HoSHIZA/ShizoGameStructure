@@ -102,7 +102,7 @@ namespace Game.Core.GameFlow
             {
                 if (RuntimeConfig.Logging)
                 {
-                    Debug.LogWarning("[<color=cyan>GAME</color>] \"AddToGameContainer\" method cannot be called outside the boot scene.");
+                    Debug.LogWarning("<color=cyan>[GAME]</color> <color=orange>\"AddToGameContainer\"</color> method cannot be called outside the boot scene.");
                 }
 
                 return;
