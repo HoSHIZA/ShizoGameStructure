@@ -1,5 +1,7 @@
 ﻿using System;
+using Game.Core.Base.EventBus;
 using Game.Core.Base.SceneManagement;
+using Game.Core.Base.ServiceLocator;
 using Game.Core.Base.StateMachine;
 using Game.Core.GameFlow.States;
 using UnityEngine;
@@ -15,12 +17,12 @@ namespace Game.Core.GameFlow
         /// Class constructor, in which all necessary dependencies are passed.
         /// To add a new state, modify the states variable, all states must be bound to the GameStateMachine.
         /// </summary>
-        public GameStateMachine(ISceneLoader sceneLoader)
+        public GameStateMachine(IServiceLocator services, ISceneLoader sceneLoader, IEventBus eventBus)
         {
             var states = new State<GameStateMachine>[]
             {
-                new BootstrapState(),
-                new MainMenuState(sceneLoader),
+                new BootstrapState(services, sceneLoader, eventBus),
+                new MainMenuState(services, sceneLoader, eventBus),
             };
             
             OnStateChanged += LogWhenStateChanged;

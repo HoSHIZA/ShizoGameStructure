@@ -1,11 +1,12 @@
 ﻿using System;
+using Game.Core.Base.ServiceLocator;
 
 namespace Game.Core.Base.SceneManagement
 {
     /// <summary>
     /// Defines a contract for loading scenes.
     /// </summary>
-    public interface ISceneLoader
+    public interface ISceneLoader : IService
     {
         /// <summary>
         /// Loads a scene by name.

@@ -1,4 +1,6 @@
-﻿using Game.Core.Base.SceneManagement;
+﻿using Game.Core.Base.EventBus;
+using Game.Core.Base.SceneManagement;
+using Game.Core.Base.ServiceLocator;
 using UnityEngine;
 
 namespace Game.Core.GameFlow
@@ -17,7 +19,7 @@ namespace Game.Core.GameFlow
         
         private void Start()
         {
-            _stateMachine = new GameStateMachine(new BasicSceneLoader(this));
+            _stateMachine = new GameStateMachine(new StaticServiceLocator(), new BasicSceneLoader(this), new EventBus());
             
             GameRunner.SetGameStateMachine(_stateMachine);
         }

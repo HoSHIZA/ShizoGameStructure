@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace Game.Core.Base.ServiceLocator
 {
     /// <summary>
-    /// Basic implementation of a IServiceLocator that manages services.
+    /// Thread-safe implementation of a IServiceLocator that manages services.
     /// </summary>
-    public sealed class BasicServiceLocator : IServiceLocator
+    public sealed class ThreadSafeServiceLocator : IServiceLocator
     {
-        private readonly Dictionary<Type, IService> _services = new Dictionary<Type, IService>();
+        private readonly ConcurrentDictionary<Type, IService> _services = new ConcurrentDictionary<Type, IService>();
 
         /// <inheritdoc/>
         public void RegisterSingle<TService, TImpl>() where TService : IService where TImpl : TService
         {
-            if (_services.ContainsKey(typeof(TService))) return;
-            
-            _services[typeof(TService)] = Activator.CreateInstance<TImpl>();
+            _services.AddOrUpdate(typeof(TService), 
+                _ => Activator.CreateInstance<TImpl>(), 
+                (_, _) => Activator.CreateInstance<TImpl>());
         }
         
         /// <inheritdoc/>
         public void RegisterSingle<TService>(TService instance) where TService : IService
         {
-            if (_services.ContainsKey(typeof(TService))) return;
-
-            _services[typeof(TService)] = instance;
+            _services.AddOrUpdate(typeof(TService), instance, (_, _) => instance);
         }
         
         /// <inheritdoc/>

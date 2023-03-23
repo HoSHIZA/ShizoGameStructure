@@ -1,11 +1,12 @@
 ﻿using System;
+using Game.Core.Base.ServiceLocator;
 
 namespace Game.Core.Base.EventBus
 {
     /// <summary>
     /// Represents an interface for an event bus.
     /// </summary>
-    public interface IEventBus
+    public interface IEventBus : IService
     {
         /// <summary>
         /// Subscribes a delegate to an event type of T.
