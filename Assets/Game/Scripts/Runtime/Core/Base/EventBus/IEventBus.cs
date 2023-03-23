@@ -42,9 +42,10 @@ namespace Game.Core.Base.EventBus
         void Fire<T>() where T : IEvent;
         
         /// <summary>
-        /// Fires the given event to all subscribers of its type.
+        /// Fires an event of type T to all subscribers. Using an instance transfer you can transfer data.
         /// </summary>
-        /// <param name="eventToFire">The event to be fired.</param>
-        void Fire(IEvent eventToFire);
+        /// <typeparam name="T">The event type to be fired.</typeparam>
+        /// <param name="eventToFire">The event instance to be fired.</param>
+        void Fire<T>(T eventToFire) where T : IEvent;
     }
 }

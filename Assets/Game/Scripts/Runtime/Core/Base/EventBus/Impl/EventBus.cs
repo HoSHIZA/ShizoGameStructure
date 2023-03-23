@@ -59,18 +59,32 @@ namespace Game.Core.Base.EventBus
 
             foreach (var handler in handlers.ToArray())
             {
-                handler.DynamicInvoke();
+                if (handler is Action action)
+                {
+                    action.Invoke();
+                }
+                else
+                {
+                    throw new ArgumentException($"This event should have no arguments");
+                }
             }
         }
         
         /// <inheritdoc/>
-        public void Fire(IEvent eventToFire)
+        public void Fire<T>(T eventToFire) where T : IEvent
         {
-            if (!_subscribers.TryGetValue(eventToFire.GetType(), out var handlers)) return;
+            if (!_subscribers.TryGetValue(typeof(T), out var handlers)) return;
 
             foreach (var handler in handlers.ToArray())
             {
-                handler.DynamicInvoke(eventToFire);
+                if (handler is Action<T> action)
+                {
+                    action.Invoke(eventToFire);
+                }
+                else
+                {
+                    throw new ArgumentException($"This event must take {typeof(T)}");
+                }
             }
         }
     }
