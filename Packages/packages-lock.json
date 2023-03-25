@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.disillusion.play-mode-plus": {
+      "version": "https://github.com/TheDisillusion/Play-Mode-Plus.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a6919d1285ce3487f4b2d60e5fa6758079c6c4c3"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.1",
       "depth": 1,
