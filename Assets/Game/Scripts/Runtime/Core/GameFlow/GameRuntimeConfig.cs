@@ -12,15 +12,12 @@ namespace Game.Core.GameFlow
         
         [Header("Boot")]
         
-        [Tooltip("If true, the game will load from the boot scene at startup, if no scene is found, the scene with 0 build index will be loaded.")]
-        [SerializeField] private bool _alwaysStartGameFromBootScene = true;
-        
-        [Tooltip("The name of the boot scene.")]
-        [SerializeField] private string _bootScene = "";
-        
         [Tooltip("If true, you will not be allowed to add objects to the game container outside the boot scene. It works only if the boot scene is defined and correct.")]
         [SerializeField, Space] private bool _disallowAddingToGameContainerOutsideBootScene = true;
         
+        [Tooltip("The name of the boot scene.")]
+        [SerializeField] private string _bootScene = "";
+
         [Header("Debugging")]
         
         [Tooltip("Whether logging is enabled for important components responsible for loading and controlling game flow.")]
@@ -28,21 +25,16 @@ namespace Game.Core.GameFlow
         
         [Tooltip("Whether logging is enabled for the GameStateMachine.")]
         [SerializeField] private bool _gameStateMachineLogging = true;
-        
+
         /// <summary>
-        /// Indicates whether the game should always start from the boot scene.
+        /// Indicates whether objects can be added to the game container outside the boot scene.
         /// </summary>
-        public bool AlwaysStartGameFromBootScene => _alwaysStartGameFromBootScene;
+        public bool DisallowAddingToGameContainerOutsideBootScene => _disallowAddingToGameContainerOutsideBootScene;
         
         /// <summary>
         /// Gets the name of the boot scene.
         /// </summary>
         public string BootScene => _bootScene;
-        
-        /// <summary>
-        /// Indicates whether objects can be added to the game container outside the boot scene.
-        /// </summary>
-        public bool DisallowAddingToGameContainerOutsideBootScene => _disallowAddingToGameContainerOutsideBootScene;
         
         /// <summary>
         /// Indicates whether logging is enabled for the game.
