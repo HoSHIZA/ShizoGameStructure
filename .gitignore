@@ -81,7 +81,3 @@ crashlytics-build.properties
 !*.dll
 !*.obj
 ProjectSettings/RiderScriptEditorPersistedState.asset
-
-# Plugins
-/[Aa]ssets/[Pp]lugins/[Ss]hizo[Gg]ames
-/[Aa]ssets/[Pp]lugins/[Ss]hizo[Gg]ames.meta
