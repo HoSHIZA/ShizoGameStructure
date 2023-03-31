@@ -42,12 +42,12 @@ namespace Game.Core.GameFlow.States
         
         private void Register_SceneLoader()
         {
-            _services.RegisterSingle<ISceneLoader>(_sceneLoader);
+            _services.Register<ISceneLoader>(_sceneLoader);
         }
         
         private void Register_EventBus()
         {
-            _services.RegisterSingle<IEventBus>(_eventBus);
+            _services.Register<IEventBus>(_eventBus);
         }
     }
 }

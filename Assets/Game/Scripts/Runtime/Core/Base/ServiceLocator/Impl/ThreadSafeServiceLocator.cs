@@ -11,7 +11,7 @@ namespace Game.Core.Base.ServiceLocator
         private readonly ConcurrentDictionary<Type, IService> _services = new ConcurrentDictionary<Type, IService>();
 
         /// <inheritdoc/>
-        public void RegisterSingle<TService, TImpl>() where TService : IService where TImpl : TService
+        public void Register<TService, TImpl>() where TService : IService where TImpl : TService
         {
             _services.AddOrUpdate(typeof(TService), 
                 _ => Activator.CreateInstance<TImpl>(), 
@@ -19,13 +19,13 @@ namespace Game.Core.Base.ServiceLocator
         }
         
         /// <inheritdoc/>
-        public void RegisterSingle<TService>(TService instance) where TService : IService
+        public void Register<TService>(TService instance) where TService : IService
         {
             _services.AddOrUpdate(typeof(TService), instance, (_, _) => instance);
         }
         
         /// <inheritdoc/>
-        public TService Single<TService>() where TService : IService
+        public TService Resolve<TService>() where TService : IService
         {
             if (_services.TryGetValue(typeof(TService), out var service))
             {

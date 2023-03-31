@@ -8,19 +8,19 @@ namespace Game.Core.Base.ServiceLocator
     public sealed class StaticServiceLocator : IServiceLocator
     {
         /// <inheritdoc/>
-        public void RegisterSingle<TService, TImpl>() where TService : IService where TImpl : TService
+        public void Register<TService, TImpl>() where TService : IService where TImpl : TService
         {
             Implementation<TService>.ServiceInstance = Activator.CreateInstance<TImpl>();
         }
         
         /// <inheritdoc/>
-        public void RegisterSingle<TService>(TService instance) where TService : IService
+        public void Register<TService>(TService instance) where TService : IService
         {
             Implementation<TService>.ServiceInstance = instance;
         }
         
         /// <inheritdoc/>
-        public TService Single<TService>() where TService : IService
+        public TService Resolve<TService>() where TService : IService
         {
             return Implementation<TService>.ServiceInstance;
         }
